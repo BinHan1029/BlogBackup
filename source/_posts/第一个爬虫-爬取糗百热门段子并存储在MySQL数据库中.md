@@ -2,6 +2,7 @@ title: 第一个爬虫-爬取糗百热门段子并存储在MySQL数据库中
 date: 2016-01-26 15:20:00
 tags:
 - Python
+- Scrapy
 ---
 
 

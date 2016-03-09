@@ -3,6 +3,7 @@ date: 2016-01-06 22:33:54
 comments: true
 tags:
 - Python
+- Scrapy
 ---
 
 ## 关于环境

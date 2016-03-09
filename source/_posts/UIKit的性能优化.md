@@ -1,0 +1,67 @@
+title: UIKit的性能优化
+date: 2015-11-04 20:45:44
+tags:
+- 移动开发
+- IOS
+---
+## 尽量避免图层的混合
+* 避免使用控件的opaque属性将其透明，当然默认的情况下UIView的opaque属性就是true，同时尽量将UIView的背景颜色设置与其父控件相同且不是透明的
+* 没有特殊情况下不要设置控件的alpha值降低透明度
+* 使用UIImage尽量使用没有带alpha通道图片
+
+#### 图层的混合
+首先对于像素点，屏幕上的每一个点就是一个像素，像素有R/G/B三种颜色构成，某些时候还要有alpha值。
+
+举个栗子，我们将两个图层混合，上层的是蓝色（R=0/G=0/B=1）,设置其透明度为50%，下层是红色（R=1/G=0/B=0）,那么最终我们看到的效果将是紫色（R=0.5/G=0/B=0.5）,这种颜色的混合，尤其上层的图层有透明度的时候，会小号一定的GPU资源，想避免这种情况，尽量直接将上层的图层透明度设置为100%，这样GPU就会忽略下面的所有图层，避免了过多不要的运算。
+
+
+#### 关于图层的混合算法
+GPU会通过图上图层和下图层的颜色进行图层混合，计算出混合部分的颜色，最理想情况的计算公式如下：
+
+R = S + D * ( 1 – Sa )
+
+其中，R表示混合结果的颜色，S是源颜色(上层的蓝色图层色)，D是目标颜色位于下层的红色图层，Sa是源颜色的alpha值，即透明度。公式中所有的S和D颜色都假定已经预先乘以了他们的透明度。
+知道图层混合的基本原理以后，再回到正题说说opaque属性的作用。当UIView的opaque属性被设为YES以后，按照上面的公式，也就是Sa的值为1，这个时候公式就变成了：R = S即不管D为什么，结果都一样。因此GPU将不会做任何的计算合成，不需要考虑它下方的任何东西(因为都被它遮挡住了)，而是简单从这个层拷贝。这节省了GPU相当大的工作量。由此看来，opaque属性的真实用处是给绘图系统提供一个性能优化开关！
+
+<!-- more -->
+
+## 尽量避免临时图像的转换
+* 确保图片的大小与控件frame一致，避免对图片进行缩放
+* 确保像素格式被GPU支持，避免增加CPU针对格式的转换
+
+关于图片的格式，一张640*960的照片一共有61440个像素，而我们已经知道每个像素有R/G/G三个值，某些格式的图片还会带alpha通道，那每个值占用1个字节，那么这样一张大小的图片大小就会将近2M，但是通常一张图片并不会有这么大，这是因为我们常见PNG或者JPG已经将像素数据进行了一种非常复杂且可逆的转化。而当我们打开图片的时候，CPU首先会将图片解压成像素数据，再将其交给GPU进行渲染。而GPU如果不支图片像素格式，那么将让CPU花费额外的经历进行转换。而同样的调整图片大小也样会增加开销。
+
+## 避免触发离屏渲染
+* 绝大多数时候离屏渲染会影响性能
+* 重写drawRect方法，设置圆角、阴影、模糊效果，光栅化都会导致离屏渲染
+
+下面这种图是正常的渲染通道流程
+
+![Alt text](/assets/blogImg/uikit_1.png)
+
+首先OpenGL提交命令道Command Buffer，随后GPU开始渲染，将渲染结果放在Render Buffer中。但是针对一些复杂的效果无法渲染出结果，它需要分步骤渲染再最终组合起来，比如添加蒙版mask:
+
+![Alt text](/assets/blogImg/uikit_2.png)
+
+在前两个渲染通道中，GPU分别得到了纹理(相机图标)和layer(蓝色的蒙版)的渲染结果，但这两个渲染结果没有直接放入Render Buffer中，也就表示这是离屏渲染。直到第三个渲染通道，才把两者组合起来放入Render Buffer中。离屏渲染意味着把渲染结果临时保存，等用到时再取出，因此相对于普通渲染更占用资源。
+
+所以通常上层设置有透明的话，会产生离屏渲染；而我们接触到的UINavigationbar、Tabbar等系统空间的半透明或者毛玻璃效果同样也会产生离屏渲染。
+
+设置阴影效果是加上阴影路径的时候加上阴影路径，因为如果没有指定路径，Core Animation将自动计算从而触发离屏渲染。认为的设置了阴影路径就会避免计算，从而避免离屏渲染
+
+``` objc
+view.layer.shadowColor = [UIColor blackColor].CGColor;//shadowColor阴影颜色  
+view.layer.shadowOffset = CGSizeMake(4,4);//shadowOffset阴影偏移,x向右偏移4，y向下偏移4，默认(0, -3),这个跟shadowRadius配合使用  
+view.layer.shadowOpacity = 0.8;//阴影透明度，默认0  
+view.layer.shadowRadius = 4;//阴影半径，默认3  
+view.layer.shadowPath = UIBezierPath(rect: view.bounds).CGPath//设置阴影路径
+``` 
+
+滑动时若需要圆角效果，开启光栅化，因为使用masksToBounds会触发离屏渲染，所以我们可以开启光栅化将圆角缓存起来。
+
+``` objc
+label.layer.masksToBounds = true
+label.layer.cornerRadius = 8
+label.layer.shouldRasterize = true
+label.layer.rasterizationScale = layer.contentsScale
+``` 
