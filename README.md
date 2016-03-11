@@ -5,5 +5,8 @@ BlogBackup
 ### 关于搭建框架
 https://hexo.io/
 
-### 关于主题
+### 关于博客主题
 https://github.com/litten/hexo-theme-yilia
+
+### 博客链接
+http://octopusline.github.io/
