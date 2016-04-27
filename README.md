@@ -9,4 +9,4 @@ https://hexo.io/
 https://github.com/litten/hexo-theme-yilia
 
 ### 博客链接
-http://octopusline.github.io/
+http://binhan666.github.io/
