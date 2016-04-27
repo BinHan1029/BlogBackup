@@ -8,7 +8,7 @@ tags:
 ![Alt text](/assets/blogImg/uiscollview_1.png)
 
 ## 前言
-UIScrollView的无限循环主要指常见的banner图可以左右无限循环滚动，常见的思路为：当我们滑动到最左边第一张的时候，在其左边添加一张UIScrollView，其为图片数组中的最后一位元素，当我们滑动到右边最后一张的时候，在其最右边同样也添加一张UIImageView，其内容为图片数组中的第一位元素，然后当结束滑动时候，重新通过计算当前要展示的页数，设置UIScrollView的偏移量即可；
+UIScrollView的无限循环主要指常见的banner图可以左右无限循环滚动，常见的思路为：当我们滑动到最左边第一张的时候，在其左边添加一张UIImageView，其为图片数组中的最后一位元素，当我们滑动到右边最后一张的时候，在其最右边同样也添加一张UIImageView，其内容为图片数组中的第一位元素，然后当结束滑动时候，重新通过计算当前要展示的页数，设置UIScrollView的偏移量即可；
 
 <!-- more -->
 
