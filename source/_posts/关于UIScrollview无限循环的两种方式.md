@@ -1,4 +1,4 @@
-title: UIScrollView无限循环的两种方式
+title: 关于UIScrollView无限循环的两种实现方式
 date: 2015-10-04 19:55:25
 tags:
 - 移动开发
