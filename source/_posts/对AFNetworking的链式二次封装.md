@@ -18,6 +18,8 @@ tags:
 * [https://github.com/Wzxhaha/WZXProgrammingIdeas](https://github.com/Wzxhaha/WZXProgrammingIdeas)
 * [http://www.ithao123.cn/content-1780874.html](http://www.ithao123.cn/content-1780874.html)
 
+<!-- more -->
+
 #### 链式结构的最终调用式例
 
 ``` objc
@@ -50,4 +52,4 @@ startRequestWithCompleteHandler:^(id response, NSError *error) {
 }
 ```
 
-代码可以下载GITHUB中[BlogDemo](https://github.com/octopusline/BlogDemo.git)进行查看。            
+代码可以下载GITHUB中[BlogDemo](https://github.com/binhan666/BlogDemo)进行查看。            

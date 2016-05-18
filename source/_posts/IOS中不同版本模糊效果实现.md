@@ -52,4 +52,4 @@ visualEffectView.alpha = 1.0;
 
 ![Alt text](/assets/blogImg/blureffect_4.png)
 
-代码可以下载GITHUB中[BlogDemo](https://github.com/octopusline/BlogDemo.git)进行查看。
+代码可以下载GITHUB中[BlogDemo](https://github.com/binhan666/BlogDemo)进行查看。

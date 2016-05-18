@@ -155,5 +155,5 @@ UIScrollView的无限循环主要指常见的banner图可以左右无限循环�
 }
 ``` 
 
-代码可以下载GITHUB中[BlogDemo](https://github.com/octopusline/BlogDemo.git)进行查看。
+代码可以下载GITHUB中[BlogDemo](https://github.com/binhan666/BlogDemo)进行查看。
 

@@ -70,3 +70,8 @@ label.layer.cornerRadius = 8
 label.layer.shouldRasterize = true
 label.layer.rasterizationScale = layer.contentsScale
 ``` 
+当然设置圆角还有很多方式：
+1、给UIView绘制圆角
+2、如果是UIImageView的话，可以直接将图片进行裁剪，当然前提图片不能为空
+3、可以使用图片遮罩，当然这个第一会使试图增加新的图层，另一方面这个对遮罩图片及视图背景颜色有要求，所以并不建议使用，虽然这种方法简单粗暴。
+

@@ -100,4 +100,4 @@ Spotlight在iOS9上做了一些新的改进, 也就是开放了一些新的API, 
 
 ```
 
-代码可以下载GITHUB中[BlogDemo](https://github.com/octopusline/BlogDemo.git)进行查看。
+代码可以下载GITHUB中[BlogDemo](https://github.com/binhan666/BlogDemo)进行查看。
