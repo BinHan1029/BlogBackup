@@ -4,7 +4,7 @@
 
 # Site
 title: BinHan的博客
-subtitle: 纸上得来终觉浅  绝知此事要躬行
+subtitle: 纸上得来终觉浅 绝知此事要躬行
 description:
 author: Bin Han
 language: zh-Hans
@@ -40,7 +40,7 @@ future: true
 highlight:
   enable: true
   line_number: true
-  auto_detect: true
+  auto_detect: false
   tab_replace:
 
 # Category & Tag
@@ -69,5 +69,5 @@ theme: yilia
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: https://github.com/OctopusLine/octopusline.github.io.git
+  repository: https://github.com/BinHan1029/BinHan1029.github.io.git
   branch: master
