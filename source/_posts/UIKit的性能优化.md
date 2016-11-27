@@ -2,7 +2,7 @@ title: UIKit的性能优化
 date: 2015-11-04 20:45:44
 tags:
 - 移动开发
-- IOS
+- iOS
 ---
 ## 尽量避免图层的混合
 * 避免使用控件的opaque属性将其透明，当然默认的情况下UIView的opaque属性就是true，同时尽量将UIView的背景颜色设置与其父控件相同且不是透明的

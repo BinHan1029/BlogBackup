@@ -1,8 +1,8 @@
 title: 为AFNetWorking添加接口数据缓存
-date: 2015-07-12 22:33:48
+date: 2015-04-12 22:33:48
 tags:
 - 移动开发
-- IOS
+- iOS
 ---
 
 ### 关于NSURLSession的缓存

@@ -2,7 +2,7 @@ title: 封装AVPlayer(包含触摸滑动快进/快退 调节音量)及相关注�
 date: 2015-08-15 23:28:21
 tags:
 - 移动开发
-- IOS
+- iOS
 ---
 ### 写在前面
 在iOS视频开发中，传统的方案可以直接使用系统的MPMoviePlayerController既可以直接将系统的播放页面掉出来，更贴心的为我们添加了控制条，全屏放大及暂停按钮。但是实际中我们可以需要针对播放器做更多的自定义设置，继而更多的是会采用AVPlayer，因为AVPlayer提供了更为强大的功能，虽然在使用的过程会比较麻烦，但是确实能为我们的app提供更好的视频播放体验提供前提。
@@ -142,7 +142,7 @@ self.playerLayer.videoGravity = AVLayerVideoGravityResizeAspect;
 ### 封装AVPlayer
 以上已经自定义好了我们的控制器试图，下面我们开始封装AVPlayer。
 
-首先我们需要对AVPlayerItem设置监听，监听我们的视频资源的状态：
+首先我们需要对AVPlayerItem设置监听，监听我们的视频资源的状态，这里通过KVO监听播放器的状态：
 
 ``` objc
     //视频添加kvo监听
@@ -162,6 +162,23 @@ self.playerLayer.videoGravity = AVLayerVideoGravityResizeAspect;
 ``` objc
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context；
 ```
+
+关于计算缓冲进度：
+
+``` objc
+- (NSTimeInterval)availableDuration
+{
+    NSArray *loadedTimeRanges = [[_player currentItem] loadedTimeRanges];
+    CMTimeRange timeRange = [loadedTimeRanges.firstObject CMTimeRangeValue];// 获取缓冲区域
+    float startSeconds = CMTimeGetSeconds(timeRange.start);
+    float durationSeconds = CMTimeGetSeconds(timeRange.duration);
+    NSTimeInterval result = startSeconds + durationSeconds;// 计算缓冲总进度
+    return result;
+}
+```
+loadedTimeRanges这个属性是一个数组，里面装的是本次缓冲的时间范围，这个用一个结构体CMTimeRange表示，start表示本次缓冲时间的起点，duratin表示本次缓冲持续的时间范围。
+
+关于CMTime,我们可以通过CMTimeGetSeconds([_player currentTime]) 获取当前播放器的时间，但是通常我们可能需要换算为小时:分钟:秒这种格式。
 
 关于触摸的回调事件，主要为控制左右滑动时视频的快进快退逻辑，及上下滑动时的音量控制逻辑，具体可参考代码：
 

@@ -2,7 +2,7 @@ title: CoreSpotlight初识
 date: 2015-04-27 21:47:03
 tags:
 - 移动开发
-- IOS
+- iOS
 ---
 
 ## Spotloight是什么?
