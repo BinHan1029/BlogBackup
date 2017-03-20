@@ -21,7 +21,7 @@ tags:
 ## 获取相册
 
 ``` objc
-	// 列出所有相册智能相册
+    // 列出所有相册智能相册
     PHFetchResult *smartAlbums = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeAlbumRegular options:nil];
     [smartAlbums enumerateObjectsUsingBlock:^(PHAssetCollection * _Nonnull collection, NSUInteger idx, BOOL *stop) {
         [self.dataArray addObject:collection];
@@ -77,7 +77,7 @@ PHFetchResult *fetchResult = [PHAsset fetchAssetsInAssetCollection:assetCollecti
 ``` 
 
 ## 获取 PHAsset 资源
-需要使用到PHImageManager，他是一个单例对象，通过 PHAsset 对象我们可以获取到我们真正使用的图像或者视频资源。
+需要使用到 PHImageManager，他是一个单例对象，通过 PHAsset 对象我们可以获取到我们真正使用的图像或者视频资源。
 
 如相片：
 
@@ -128,6 +128,8 @@ options.deliveryMode = PHImageRequestOptionsDeliveryModeOpportunistic;
 
 ``` 
 
+这个代理方法，会在相册中数据有任何变化，例如相册中资源被删除、被编辑、添加了新照片、视频等，当我们再次回到应用时都自动进行回调。另外当我们在应用中同步了 iCloud 的资源，那么也会回调次方法。
+
 ### 最后
 PHAsset 是属于 iPhone 相册相关操作范围内的概念，PHAsset 并不是一个真正意义上的一个文件，我们通常获取到 PHAsset 后需要将真正的文件保存到沙盒中再将其上传到 CDN。推荐阅读
 [ALAsset/PHAsset 中的图片和视频文件](http://io.upyun.com/2016/03/23/the-real-files-in-alasset-and-phasset/)
@@ -142,4 +144,4 @@ PHAsset 是属于 iPhone 相册相关操作范围内的概念，PHAsset 并不�
 
 
 
-	
+    
