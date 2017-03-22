@@ -5,8 +5,9 @@ tags:
 - iOS
 ---
 
-### 关于NSURLSession的缓存
-NSURLSession是iOS7之后对NSURLConnection更进一步的优化封装，可通过NSURLSessionConfiguration对其进行初始化设置，其中requestCachePolicy属性设置就是配置获取得到NSURLResponse之后的缓存策略：
+NSURLSession 是iOS7之后对 NSURLConnection 更进一步的优化封装，可通过 NSURLSessionConfiguration 对其进行初始化设置，其中 requestCachePolicy 属性设置就是配置获取得到 NSURLResponse 之后的缓存策略：
+
+<!-- more -->
 
 ``` objc
 typedef NS_ENUM(NSUInteger, NSURLRequestCachePolicy)
@@ -27,15 +28,14 @@ typedef NS_ENUM(NSUInteger, NSURLRequestCachePolicy)
 };
 ```
 
-<!-- more -->
 
-### 关于AFNetWorking的缓存
-其实AFNetWorking(特指3.x版本)本质上讲就是基于对NSURLSession的再一次封装，所以它默认就已经可以使用NSURLCache缓存，即我们可以直接使用NSURLCache进行缓存设置，而NSURLCache是一个NSURLRequest对应一个NSURLResponse进行缓存的。
+### 关于 AFNetWorking 的缓存
+其实 AFNetWorking(特指3.x版本)本质上讲就是基于对 NSURLSession 的再一次封装，所以它默认就已经可以使用 NSURLCache 缓存，即我们可以直接使用 NSURLCache 进行缓存设置，而 NSURLCache 是一个 NSURLRequest 对应一个 NSURLResponse 进行缓存的。
 
 ``` objc
 - (nullable NSCachedURLResponse *)cachedResponseForRequest:(NSURLRequest *)request;
 ```
-我们正常的使用AFN进行get请求如下：
+我们正常的使用 AFN 进行 get 请求如下：
 
 ``` objc
 	AFHTTPSessionManager *manager = [self setupAFHTTPSessionManager];
@@ -47,7 +47,7 @@ typedef NS_ENUM(NSUInteger, NSURLRequestCachePolicy)
     }];
 ```
 
-然后get方法创建完成后会返回一个NSURLSessionDataTask对象，我们通过task.originalRequest即可获取上一次的NSURLRequest对象，通过它我们即可以从cache中获取缓存数据。
+然后 get 方法创建完成后会返回一个 NSURLSessionDataTask 对象，我们通过 task.originalRequest 即可获取上一次的 NSURLRequest 对象，通过它我们即可以从 cache 中获取缓存数据。
 
 ``` objc
 	NSCachedURLResponse *reaponse = [[NSURLCache sharedURLCache] cachedResponseForRequest:a.originalRequest];
@@ -58,7 +58,7 @@ typedef NS_ENUM(NSUInteger, NSURLRequestCachePolicy)
 	}
 ```
 
-但是我们在第一进行请求的时候肯定是没有缓存的，所以在第一次缓存成功后需要对返回的NSURLResponse对象进行缓存：
+但是我们在第一进行请求的时候肯定是没有缓存的，所以在第一次缓存成功后需要对返回的 NSURLResponse 对象进行缓存：
 
 ``` objc
  	NSData *data = [NSJSONSerialization dataWithJSONObject:responseObject options:0 error:nil];
@@ -66,7 +66,7 @@ typedef NS_ENUM(NSUInteger, NSURLRequestCachePolicy)
 	[[NSURLCache sharedURLCache] storeCachedResponse:cachedResponse forRequest:task.originalRequest];
 ```
 
-### 封装我们自己的NSCache
+### 封装我们自己的 NSCache
 主要最对缓存数据进行过期处理
 
 ``` objc

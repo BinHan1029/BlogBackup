@@ -24,10 +24,12 @@ qiubai/
 	scrapy.cfg		  //项目的配置文件
 ```
 
-## 明确目标，定义item
-在Scrapy中，items是用来加载抓取内容的容器，有点类似IOS中的model模型，可以理解成类似于ORM的映射关系，但是提供了一些额外的保护减少错误。
+<!-- more -->
 
-在qiubai目录下的items.py文件，在后面添加我们自己的class hotItem，包含了头像、昵称、内容、点赞数量及评论数：
+## 明确目标，定义 item
+在 Scrapy 中，items 是用来加载抓取内容的容器，有点类似 iOS 中的 model 模型，可以理解成类似于 ORM 的映射关系，但是提供了一些额外的保护减少错误。
+
+在qiubai目录下的 items.py 文件，在后面添加我们自己的 class hotItem，包含了头像、昵称、内容、点赞数量及评论数：
 
 ```python
 import scrapy
@@ -41,18 +43,18 @@ class hotItem(scrapy.Item):
     commentNum = scrapy.Field()
 ```
 
-<!-- more -->
+
 
 ## 制作爬虫
-Spider是用户自己编写的类，用来从一个域（或域组）中抓取信息。
-他们定义了用于下载的URL列表、跟踪链接的方案、解析网页内容的方式，以此来提取items。
-要建立一个Spider，你必须用scrapy.spider.BaseSpider创建一个子类，并确定三个强制的属性：
+Spider 是用户自己编写的类，用来从一个域（或域组）中抓取信息。
+他们定义了用于下载的URL列表、跟踪链接的方案、解析网页内容的方式，以此来提取 items。
+要建立一个 Spider，你必须用 scrapy.spider.BaseSpider 创建一个子类，并确定三个强制的属性：
 
 * name：爬虫的识别名称，必须是唯一的，在不同的爬虫中你必须定义不同的名字。
-* start_urls：爬取的URL列表。爬虫从这里开始抓取数据，所以，第一次下载的数据将会从这些urls开始。其他子URL将会从这些起始URL中继承性生成。
-* parse()：解析的方法，调用的时候传入从每一个URL传回的Response对象作为唯一参数，负责解析并匹配抓取的数据(解析为item)，跟踪更多的URL。
+* start_urls：爬取的URL列表。爬虫从这里开始抓取数据，所以，第一次下载的数据将会从这些 urls 开始。其他子 URL 将会从这些起始URL中继承性生成。
+* parse()：解析的方法，调用的时候传入从每一个 URL 传回的 Response 对象作为唯一参数，负责解析并匹配抓取的数据(解析为 item )，跟踪更多的 URL。
 
-接下来定义Spider，在项目的/qiubai/spoders目录下，并设置了spider的名字、爬虫的约束范围，及网页文件进行存储
+接下来定义 Spider，在项目的 /qiubai/spoders 目录下，并设置了 spider 的名字、爬虫的约束范围，及网页文件进行存储
 
 ```python
 import scrapy
@@ -138,10 +140,10 @@ class RandomUserAgentMiddleware(UserAgentMiddleware):
 ```
 添加完成之后，再次执行就OK了。可以在项目根目录下看到1和2两个文件，其实里面的内容是html源代码，当然这仅仅是演示爬取的过程，接下来就是对源码进行解析。
 
-以上这个过程主要是我们将使用创建的爬虫hot，把start_urls里指定的每个URL创建了一个scrapy.http.Request 对象 ，并将爬虫的parse 方法指定为回调函数，在这里我们仅仅进行了保存操作。然后，这些 Request被调度并执行，之后通过parse()方法返回scrapy.http.Response对象，并反馈给爬虫。
+以上这个过程主要是我们将使用创建的爬虫 hot，把 start_urls 里指定的每个URL创建了一个 scrapy.http.Request 对象 ，并将爬虫的 parse 方法指定为回调函数，在这里我们仅仅进行了保存操作。然后，这些 Request 被调度并执行，之后通过 parse() 方法返回 scrapy.http.Response 对象，并反馈给爬虫。
 
 ### 取
-在基础的爬虫里，这一步可以用正则表达式来抓。在Scrapy里，使用一种叫做 XPath selectors的机制，它基于 XPath表达式。如果你想了解更多selectors和其他机制你可以查阅资料：[选择器(Selectors)](http://scrapy-chs.readthedocs.org/zh_CN/latest/topics/selectors.html)
+在基础的爬虫里，这一步可以用正则表达式来抓。在 Scrapy 里，使用一种叫做 XPath selectors的机制，它基于 XPath 表达式。如果你想了解更多 selectors 和其他机制你可以查阅资料：[选择器(Selectors)](http://scrapy-chs.readthedocs.org/zh_CN/latest/topics/selectors.html)
 
 #### 简单的罗列一下有用的xpath路径表达式：
 ```
@@ -154,12 +156,12 @@ class RandomUserAgentMiddleware(UserAgentMiddleware):
 		@			选取属性。
 ```
 
-#### 下面是一些XPath表达式的例子和他们的含义：
+#### 下面是一些 XPath 表达式的例子和他们的含义：
 * //div[@class="stats"]: 选择所有包含 class="stats" 属性的div 标签元素
 * //td: 选择所有 <td> 元素
 *  /title/text(): 选择前面提到的<title> 元素下面的文本内容
 
-接下来我们将对应的源码标签解析，并将对象保存在items列表中，对象保存段子的作者昵称头像等内容，我们主要解析的就是下面这段内容：
+接下来我们将对应的源码标签解析，并将对象保存在 items 列表中，对象保存段子的作者昵称头像等内容，我们主要解析的就是下面这段内容：
 
 ![Alt text](/assets/blogImg/qiubai_1.png)
 
@@ -197,23 +199,23 @@ class qiubaiSpider(scrapy.spiders.Spider):
 ```       
 
 ## 存储爬取的内容
-保存信息的最简单的方法是通过[Feed exports](http://scrapy-chs.readthedocs.org/zh_CN/latest/topics/feed-exports.html)，主要有四种数据格式：JSON，JSON lines，CSV，XML。
-我们将结果用最常用的JSON导出，命令如下：
+保存信息的最简单的方法是通过 [Feed exports](http://scrapy-chs.readthedocs.org/zh_CN/latest/topics/feed-exports.html)，主要有四种数据格式：JSON，JSON lines，CSV，XML。
+我们将结果用最常用的 JSON 导出，命令如下：
 
 -o 后面是导出文件名，-t 后面是导出类型。
 
 ``` 
 scrapy crawl hot -o items.json -t json  
 ``` 
-此时就可以在项目跟目录下看到items.json文件，可以使用文本编辑器查看了。当然我们更多的时候还是希望保存到[MySQL](http://www.mysql.com/)中便于使用，这时候就需要使用到pipelines.py文件了。
+此时就可以在项目跟目录下看到 items.json 文件，可以使用文本编辑器查看了。当然我们更多的时候还是希望保存到 [MySQL](http://www.mysql.com/)中便于使用，这时候就需要使用到 pipelines.py 文件了。
 
-当然还需要修改setting.py这个文件：将下面这句话加进去
+当然还需要修改 setting.py 这个文件：将下面这句话加进去
 
 ``` 
 ITEM_PIPELINES=['fjsen.pipelines.QiubaiPipeline']
 ``` 
 
-并且修改在pipelines.py文件，修改对应的数据库账户密码，建议制定为utf8编码，否则会出现乱码。并且推荐使用这种方法进行数据插入，写sql语句出错太难调了。
+并且修改在 pipelines.py 文件，修改对应的数据库账户密码，建议制定为 utf8 编码，否则会出现乱码。并且推荐使用这种方法进行数据插入，写 sql 语句出错太难调了。
 
 ``` python
 from scrapy import log
@@ -256,6 +258,6 @@ class QiubaiPipeline(object):
         log.err(e)
 ``` 
 
-接着，执行爬虫命令后查看数据库就可以了，在此之前确保你的[MySQL](http://www.mysql.com/)服务是启动的：
+接着，执行爬虫命令后查看数据库就可以了，在此之前确保你的 [MySQL](http://www.mysql.com/) 服务是启动的：
 
 ![Alt text](/assets/blogImg/qiubai_2.png)

@@ -6,7 +6,7 @@ tags:
 ---
 
 ## 数据库同步
-首先在项目setting.py下对需要修改对应的<a name="fenced-code-block">DATABASES</a>定义，对应的我们需要创建一个名为djangodemo的数据库并保证我们的MySQL服务是开启的：
+首先在项目 setting.py 下对需要修改对应的 <a name="fenced-code-block">DATABASES</a> 定义，对应的我们需要创建一个名为 djangodemo 的数据库并保证我们的MySQL服务是开启的：
 
 ``` python
 # Database
@@ -32,10 +32,10 @@ DATABASES = {
 	python manage.py migrate
 ```
 
-使用安装MySQLWorkbench打开数据库查看表，django已经自动为我们创建基本用户、组、日志、seesion的表：
+使用安装 MySQLWorkbench 打开数据库查看表，django 已经自动为我们创建基本用户、组、日志、seesion 的表：
 ![Alt text](/assets/blogImg/django_8.png)
 
-## 创建admin帐号
+## 创建 admin 帐号
 * 首先我们要新建一个用户名，用来登陆管理网站，可以使用如下命令：
 
 	python manage.py createsuperuser

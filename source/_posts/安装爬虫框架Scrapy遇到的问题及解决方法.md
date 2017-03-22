@@ -10,12 +10,12 @@ tags:
 **MAC OS** :10.10
 
 ## 安装	Scrapy
-依然像安装MySQL-python模块一样，在终端下使用pip进行安装：
+依然像安装 MySQL-python 模块一样，在终端下使用 pip 进行安装：
 
 ```ruby
 	sudo pip install Scrapy
 ```
-如果下载完成后提示successful installed Scrapy，那么 Scrapy 就安装成功了。但通常都事与愿违，我在安装的时候遇到了这样的一个错误：
+如果下载完成后提示 successful installed Scrapy，那么 Scrapy 就安装成功了。但通常都事与愿违，我在安装的时候遇到了这样的一个错误：
 
 <!-- more -->
 
@@ -51,20 +51,20 @@ tags:
 	C_INCLUDE_PATH=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/include/libxml2:/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/include/libxml2/libxml:/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/include
 
 ```
-3、参照官网使用如下命令安装Scrapy
+3、参照官网使用如下命令安装 Scrapy
 
 ```ruby
 	STATIC_DEPS=true pip install lxml
 
 ```
-一般此三个方法就可解决错误成功安装Scrapy，如果还是失败，只能再去[baidu](https://www.baidu.com/)/[google](https://www.google.com.hk)/[StackOverflow](http://stackoverflow.com/)上寻找同样的错误。我使用的是第一种方法，成功的安装了Scrapy。
+一般此三个方法就可解决错误成功安装Scrapy，如果还是失败，只能再去 [baidu](https://www.baidu.com/)/[google](https://www.google.com.hk)/[StackOverflow](http://stackoverflow.com/) 上寻找同样的错误。我使用的是第一种方法，成功的安装了 Scrapy。
 
 
 ```ruby
 Successfully installed Scrapy-1.0.4 characteristic-14.3.0 lxml-3.5.0 pyasn1-0.1.9 pyasn1-modules-0.0.8 service-identity-14.0.0
 
 ```
-但是在终端下使用scrapy命令确又出现错误
+但是在终端下使用 scrapy 命令确又出现错误
 
 ```ruby
 Traceback (most recent call last):
@@ -81,13 +81,13 @@ Traceback (most recent call last):
 ImportError: cannot import name xmlrpc_client
 
 ```
-最后查到是因为six这个module有问题导致，卸载之，重新通过easy_install six安装后即可：
+最后查到是因为 six 这个 module 有问题导致，卸载之，重新通过 easy_install six安装后即可：
 
 ```ruby
 sudo pip uninstall six	
 sudo easy_install six
 ```
-之后我们就可以使用scrapy命令了：
+之后我们就可以使用 scrapy 命令了：
 
 ```ruby
 scrapy version//查看版本

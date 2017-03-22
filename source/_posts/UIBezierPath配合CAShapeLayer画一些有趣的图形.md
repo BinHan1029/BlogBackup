@@ -5,15 +5,16 @@ tags:
 - iOS
 ---
 
-## 前言
 CAShapeLayer是CALayer的子类，但是比CALayer更灵活，配合一个神奇的属性path用这个属性配合上 UIBezierPath 这个类就可以达到超神的效果。
 
-## 玩一下UIBezierPath
-UIBezierPath顾名思义，这是用贝塞尔曲线的方式来构建一段弧线，你可以用任意条弧线来组成你想要的形状，它包含起始点、终点、及控制点三个参数。如下图红色矩形范围内的白色背景，最上面就是一条有弧度的曲线。
+## 玩一下 UIBezierPath
+UIBezierPath 顾名思义，这是用贝塞尔曲线的方式来构建一段弧线，你可以用任意条弧线来组成你想要的形状，它包含起始点、终点、及控制点三个参数。如下图红色矩形范围内的白色背景，最上面就是一条有弧度的曲线。
+
+<!-- more -->
 
 ![Alt text](/assets/blogImg/bezier_1.png)
 
-它可以用CAShapeLayer+UIBezierPath来做，思路大概是这样，先移动到左上方的位置，然后向下划线，然后往右划线，然后往上划线，还剩一个盖子，这个盖子就用一个控制点控制曲率，非常简单，图中的红色点即为控制点，代码如下：
+它可以用 CAShapeLayer+UIBezierPath 来做，思路大概是这样，先移动到左上方的位置，然后向下划线，然后往右划线，然后往上划线，还剩一个盖子，这个盖子就用一个控制点控制曲率，非常简单，图中的红色点即为控制点，代码如下：
 
 ``` objc
     CAShapeLayer *layer =  [[CAShapeLayer alloc] init];
@@ -31,7 +32,7 @@ UIBezierPath顾名思义，这是用贝塞尔曲线的方式来构建一段弧�
     [self.view.layer addSublayer:layer];
 ``` 
 
-<!-- more -->
+
 
 效果如图：
 

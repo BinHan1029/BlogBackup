@@ -4,21 +4,22 @@ tags:
 - 移动开发
 - iOS
 ---
-### 写在前面
-在iOS视频开发中，传统的方案可以直接使用系统的MPMoviePlayerController既可以直接将系统的播放页面掉出来，更贴心的为我们添加了控制条，全屏放大及暂停按钮。但是实际中我们可以需要针对播放器做更多的自定义设置，继而更多的是会采用AVPlayer，因为AVPlayer提供了更为强大的功能，虽然在使用的过程会比较麻烦，但是确实能为我们的app提供更好的视频播放体验提供前提。
 
-
-### 初步认识AVPlayer
-在这之前我们先介绍几个相关类：
-
-* AVPlayerItem：一个视频资源对应一个[AVPlayerItem](https://developer.apple.com/library/ios/documentation/AVFoundation/Reference/AVPlayerItem_Class/)对象，当你需要循环播放多个视频资源时也需创建多个AVPlayerItem对象，并将其添加在一个数组中。我们可以通过静态方法[playerItemWithURL](https://developer.apple.com/library/ios/documentation/AVFoundation/Reference/AVPlayerItem_Class/)进行创建，同样也可以通过[AVAsset](https://developer.apple.com/library/ios/documentation/AVFoundation/Reference/AVAsset_Class/index.html#//apple_ref/occ/cl/AVAsset)，而根据两种创建方法的不同，我们即知道加载本地视频资源还是网络视频资源。
-* CMTime：关于[CMTime](https://developer.apple.com/library/ios/documentation/CoreMedia/Reference/CMTime/)我们可以很方便的获取到视频资源的精准播放长度长度，及快速让播放器定位到指定时间进行播放。
-* AVPlayer:[AVPlayer](https://developer.apple.com/library/ios/documentation/AVFoundation/Reference/AVPlayer_Class/)我们能把播放器做得那么溜全靠它了，视频资源就是交给它进行处理的。
-* AVPlayerLayer:[AVPlayerLayer](https://developer.apple.com/library/ios/documentation/AVFoundation/Reference/AVPlayerLayer_Class/)其实AVPlayer仅仅处理视频资源，但是视频的画面其实是加载到AVPlayerLayer上的。
+在iOS视频开发中，传统的方案可以直接使用系统的 MPMoviePlayerController 既可以直接将系统的播放页面掉出来，更贴心的为我们添加了控制条，全屏放大及暂停按钮。但是实际中我们可以需要针对播放器做更多的自定义设置，继而更多的是会采用 AVPlayer，因为 AVPlayer 提供了更为强大的功能，虽然在使用的过程会比较麻烦，但是确实能为我们的 app 提供更好的视频播放体验提供前提。
 
 <!-- more -->
 
-根据以上的简单介绍，我们可以做一个简单的视频播放器，只要仅仅能看到播放画面及听到声音就可以了，这里需要特别注意AVPlayer必须设置为成员变量，在局部变量中因为方法执行完后即被释放了会导致视频播放失败：
+### 初步认识 AVPlayer
+在这之前我们先介绍几个相关类：
+
+* AVPlayerItem：一个视频资源对应一个 [AVPlayerItem](https://developer.apple.com/library/ios/documentation/AVFoundation/Reference/AVPlayerItem_Class/)对象，当你需要循环播放多个视频资源时也需创建多个AVPlayerItem对象，并将其添加在一个数组中。我们可以通过静态方法 [playerItemWithURL](https://developer.apple.com/library/ios/documentation/AVFoundation/Reference/AVPlayerItem_Class/) 进行创建，同样也可以通过 [AVAsset](https://developer.apple.com/library/ios/documentation/AVFoundation/Reference/AVAsset_Class/index.html#//apple_ref/occ/cl/AVAsset)，而根据两种创建方法的不同，我们即知道加载本地视频资源还是网络视频资源。
+* CMTime：关于 [CMTime](https://developer.apple.com/library/ios/documentation/CoreMedia/Reference/CMTime/) 我们可以很方便的获取到视频资源的精准播放长度长度，及快速让播放器定位到指定时间进行播放。
+* AVPlayer: [AVPlayer](https://developer.apple.com/library/ios/documentation/AVFoundation/Reference/AVPlayer_Class/) 我们能把播放器做得那么溜全靠它了，视频资源就是交给它进行处理的。
+* AVPlayerLayer: [AVPlayerLayer](https://developer.apple.com/library/ios/documentation/AVFoundation/Reference/AVPlayerLayer_Class/) 其实 AVPlayer 仅仅处理视频资源，但是视频的画面其实是加载到AVPlayerLayer上的。
+
+
+
+根据以上的简单介绍，我们可以做一个简单的视频播放器，只要仅仅能看到播放画面及听到声音就可以了，这里需要特别注意 AVPlayer 必须设置为成员变量，在局部变量中因为方法执行完后即被释放了会导致视频播放失败：
 
 ``` objc
 NSString *filePath = [[NSBundle mainBundle] pathForResource:@"snow" ofType:@"mp4"];
@@ -36,11 +37,11 @@ self.playerLayer.videoGravity = AVLayerVideoGravityResizeAspect;
 ### 为我们的播放器添加控制条
 这一步主要为在播放器上添加常规按钮，如返回、播放/暂停、全屏、播放时间进度条等一些为用户和播放器的交互试图。
 
-首先我们自定义一个BHPlayerControlView，这里面包含了所有的操作按钮及进度条、展示时间的Label、当然还包括加载视频缓冲时的菊花UIActivityIndicatorView，以下主要为设置控制条子试图约束的代码：
+首先我们自定义一个 BHPlayerControlView，这里面包含了所有的操作按钮及进度条、展示时间的 Label、当然还包括加载视频缓冲时的菊花 UIActivityIndicatorView，以下主要为设置控制条子试图约束的代码：
 
 ``` objc
 /**
- *  设置子空间约束，采用Masonry设置约束，不需要重写layoutSubviews方法
+ *  设置子空间约束，采用 Masonry 设置约束，不需要重写 layoutSubviews 方法
  */
 - (void)makeSubViewsConstraints
 {
@@ -139,10 +140,10 @@ self.playerLayer.videoGravity = AVLayerVideoGravityResizeAspect;
 }
 ```
 
-### 封装AVPlayer
-以上已经自定义好了我们的控制器试图，下面我们开始封装AVPlayer。
+### 封装 AVPlayer
+以上已经自定义好了我们的控制器试图，下面我们开始封装 AVPlayer。
 
-首先我们需要对AVPlayerItem设置监听，监听我们的视频资源的状态，这里通过KVO监听播放器的状态：
+首先我们需要对 AVPlayerItem 设置监听，监听我们的视频资源的状态，这里通过 KVO 监听播放器的状态：
 
 ``` objc
     //视频添加kvo监听
@@ -157,7 +158,7 @@ self.playerLayer.videoGravity = AVLayerVideoGravityResizeAspect;
     [self.playerItem addObserver:self forKeyPath:@"playbackLikelyToKeepUp" options:NSKeyValueObservingOptionNew context:nil];
 ```
 
-然后在下面的回调方法中分别针对不同的状态进行不同的逻辑判断，主要为视频成功加载后需要为我们的播放器添加触摸手势，这里不建议直接重写touches的四个回调事件，因为这样会更新我们触摸逻辑的复杂度，其次视频如果加载失败，还需要额外的判断，不划算。所以这里建议直接使用手势，滑动事件监听手势的回调方法就可以了。
+然后在下面的回调方法中分别针对不同的状态进行不同的逻辑判断，主要为视频成功加载后需要为我们的播放器添加触摸手势，这里不建议直接重写 touches 的四个回调事件，因为这样会更新我们触摸逻辑的复杂度，其次视频如果加载失败，还需要额外的判断，不划算。所以这里建议直接使用手势，滑动事件监听手势的回调方法就可以了。
 
 ``` objc
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context；
@@ -176,9 +177,9 @@ self.playerLayer.videoGravity = AVLayerVideoGravityResizeAspect;
     return result;
 }
 ```
-loadedTimeRanges这个属性是一个数组，里面装的是本次缓冲的时间范围，这个用一个结构体CMTimeRange表示，start表示本次缓冲时间的起点，duratin表示本次缓冲持续的时间范围。
+loadedTimeRanges 这个属性是一个数组，里面装的是本次缓冲的时间范围，这个用一个结构体 CMTimeRange 表示，start 表示本次缓冲时间的起点，duratin 表示本次缓冲持续的时间范围。
 
-关于CMTime,我们可以通过CMTimeGetSeconds([_player currentTime]) 获取当前播放器的时间，但是通常我们可能需要换算为小时:分钟:秒这种格式。
+关于 CMTime,我们可以通过 CMTimeGetSeconds([_player currentTime]) 获取当前播放器的时间，但是通常我们可能需要换算为小时:分钟:秒这种格式。
 
 关于触摸的回调事件，主要为控制左右滑动时视频的快进快退逻辑，及上下滑动时的音量控制逻辑，具体可参考代码：
 
@@ -190,7 +191,7 @@ loadedTimeRanges这个属性是一个数组，里面装的是本次缓冲的时�
  */
 - (void)panDirection:(UIPanGestureRecognizer *)pan
 ```
-还有一个很重要的触摸事件，就是滑动我们的进度条UISlider的回调，这个回调里面主要为处理NSTimer及滑动过程中进度指示Label的文本内容设置：
+还有一个很重要的触摸事件，就是滑动我们的进度条 UISlider 的回调，这个回调里面主要为处理 NSTimer 及滑动过程中进度指示 Label 的文本内容设置：
 
 ``` objc
 /**

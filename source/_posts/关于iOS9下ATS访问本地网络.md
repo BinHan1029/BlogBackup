@@ -6,25 +6,24 @@ tags:
 - iOS
 ---
 
-## 前言
 这段时间可能所有的开发 iOS 的公司都在做应用的 HTTPS 适配，因为在 WWDC 16 中，Apple 表示从 2017 年 1 月 1 日起，所有的新提交 app 默认是不允许使用 NSAllowsArbitraryLoads 来绕过 ATS 限制的，也就是说，我们最好保证 app 的所有网络请求都是 HTTPS 加密的，否则可能会在应用审核时遇到麻烦。
 
 由于 Apple 在这之前预留了足够的时间让我们来进行网络适配，所以在这之前我们大部分情况下将 NSAllowsArbitraryLoads 设置为 YES，这样网络请求不受 ATS 的限制了。
+
+
+<!-- more -->
+
 
 ## ATS属性配置
 当然 ATS 相关 NSAppTransportSecurity 下的诸多属性都是可选的，毕竟通常我们并不能保证我们跳转的web页面、多媒体资源、一些第三方的 SDK 等是一定支持 HTTPS 的，所以在这方面 Apple 给予了足够的可配置选项，当然在提交审核时我们需要提供一个"合理的解释"。
 
 例如:
 
-* NSAllowsArbitraryLoadsForMedia，默认值为NO，置为YES后，使用AV Foundation框架载入资源时不受ATS的限制；（iOS 10.0及以上支持，测试发现真机可行，模拟器未起作用）
-* NSAllowsArbitraryLoadsInWebContent，默认值为NO，置为YES后，使用web view的网络请求不受ATS限制；（iOS 10.0及以上支持）
-* NSAllowsLocalNetworking，默认值为NO，置为YES后，本地网络请求不受ATS限制；（iOS 10.0及以上支持）
+* NSAllowsArbitraryLoadsForMedia，默认值为NO，置为 YES 后，使用 AV Foundation 框架载入资源时不受 ATS 的限制；（iOS 10.0及以上支持，测试发现真机可行，模拟器未起作用）
+* NSAllowsArbitraryLoadsInWebContent，默认值为 NO，置为 YES 后，使用 web view 的网络请求不受 ATS 限制；（iOS 10.0及以上支持）
+* NSAllowsLocalNetworking，默认值为 NO，置为 YES 后，本地网络请求不受 ATS 限制；（iOS 10.0及以上支持）
 
-所以我们发现这些字段都是 iOS10 下新添加的，这样就会引发我们应用在 iOS9 下可能访问 HTTP 资源失败。。。。这篇文章也并不是告诉我们怎么来升级应用的 HTTPS 的，关于 AFNetWorking 升级 HTTPS 二次验证证书的资源也有很多，这里主要记录我所在 iOS9 下所踩得坑，当然在写这篇博客的时候，Apple也将 [ATS 无限期延期](https://developer.apple.com/news/?id=12212016b)了。
-
-
-<!-- more -->
-
+所以我们发现这些字段都是 iOS10 下新添加的，这样就会引发我们应用在 iOS9 下可能访问 HTTP 资源失败。。。。这篇文章也并不是告诉我们怎么来升级应用的 HTTPS 的，关于 AFNetWorking 升级 HTTPS 二次验证证书的资源也有很多，这里主要记录我所在 iOS9 下所踩得坑，当然在写这篇博客的时候，Apple 也将 [ATS 无限期延期](https://developer.apple.com/news/?id=12212016b)了。
 
 ![Alt text](/assets/blogImg/ats_1.png)
 

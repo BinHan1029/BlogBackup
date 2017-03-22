@@ -14,9 +14,11 @@ tags:
 * PHImageManager：用于从 PHFetchResult 中获取 PHAsset，可以设置相关参数，获取视频/图片/或者将一个PHAsset转化为NSData
 * PHImageRequestOptions：获取 PHAsset 资源时的相关设置，获取资源的方式(同步/异步)，资源的质量等。
 
-![Alt text](/assets/blogImg/PhotoKit_1.png)
 
 <!-- more -->
+
+![Alt text](/assets/blogImg/PhotoKit_1.png)
+
 
 ## 获取相册
 
