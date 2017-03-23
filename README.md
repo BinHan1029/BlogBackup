@@ -6,7 +6,7 @@ BlogBackup
 **[https://hexo.io/](https://hexo.io/)**
 
 ### 关于博客主题
-**[https://github.com/litten/hexo-theme-yilia](https://github.com/litten/hexo-theme-yilia)**
+**[https://github.com/LouisBarranqueiro/hexo-theme-tranquilpeak](https://github.com/LouisBarranqueiro/hexo-theme-tranquilpeak)**
 
 ### 博客链接
 **[http://binhan666.github.io/](http://binhan666.github.io/)**
