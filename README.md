@@ -9,4 +9,4 @@ BlogBackup
 **[https://github.com/LouisBarranqueiro/hexo-theme-tranquilpeak](https://github.com/LouisBarranqueiro/hexo-theme-tranquilpeak)**
 
 ### 博客链接
-**[http://binhan666.github.io/](http://binhan666.github.io/)**
+**[http://binhandev.github.io/](http://binhandev.github.io/)**
