@@ -1,4 +1,4 @@
-title: JSPatch使用小结
+title: JSPatch 使用小结
 date: 2015-12-03 20:40:15
 tags:
 - 移动开发
@@ -9,7 +9,7 @@ tags:
 
 <!-- more -->
 
-## 关于JSPatch
+## 关于 JSPatch
 [GITHUB地址](https://github.com/bang590/JSPatch)，除了查看demo运行外，在 [Wiki](https://github.com/bang590/JSPatch/wiki)里面我们也可以看到更详细的介绍说明。安装同样支持 cocoaPod，快捷方便。这里不具体更多的说明，只是记录下再使用的过程中的关键点。
 
 ## 服务端的patch文件部署问题

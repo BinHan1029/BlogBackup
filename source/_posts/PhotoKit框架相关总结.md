@@ -1,12 +1,12 @@
 ---
-title: PhotoKit框架相关总结
+title: PhotoKit 框架相关总结
 date: 2016-03-17 22:41:13
 tags:
 - 移动开发
 - iOS
 ---
 
-## PhotoKit中相关类介绍
+## PhotoKit 中相关类介绍
 
 * PHAsset：代表一个照片库中的一个资源，如一个照片/一个视频
 * PHFetchResult：PHAsset 的集合，对应照片应用中的一个相册

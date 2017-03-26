@@ -1,4 +1,4 @@
-title: 封装AVPlayer(包含触摸滑动快进/快退 调节音量)及相关注意点
+title: 封装 AVPlayer (包含触摸滑动快进/快退 调节音量)及相关注意点
 date: 2015-08-15 23:28:21
 tags:
 - 移动开发
@@ -241,7 +241,7 @@ loadedTimeRanges 这个属性是一个数组，里面装的是本次缓冲的时
     BOOL success = [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayback error: &setCategoryError];
     if (!success) { /* handle the error in setCategoryError */ }
 ```
-代码可以下载GITHUB中[BlogDemo](https://github.com/binhan666/BlogDemo)进行查看。 
+代码可以下载GITHUB中[BlogDemo](https://github.com/binhandev/BlogDemo)进行查看。 
 
 
 

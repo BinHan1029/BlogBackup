@@ -1,4 +1,4 @@
-title: Mac下的Python环境搭建及MySQL-python模块安装
+title: Mac 下的 Python 环境搭建及 MySQL-python 模块安装
 date: 2015-12-25 14:03:21
 comments: true
 tags:

@@ -1,4 +1,4 @@
-title: 对AFNetworking的链式二次封装
+title: 对 AFNetworking 的链式二次封装
 date: 2015-04-10 18:23:27
 tags:
 - 移动开发
@@ -22,7 +22,7 @@ tags:
 #### 链式结构的最终调用式例
 
 ``` objc
-[[BHNetReqManager sharedManager].bh_requestUrl(@"http://binhan666.github.io/").
+[[BHNetReqManager sharedManager].bh_requestUrl(@"http://binhandev.github.io/").
 bh_requestType(GET).
 bh_responseSerializer(HTTPResponseSerializer).
 bh_parameters(nil) 
@@ -45,10 +45,10 @@ startRequestWithCompleteHandler:^(id response, NSError *error) {
 而调用此方法则直接 .bh_newmothed() 即可
 
 ``` objc
-[[BHNetReqManager sharedManager].bh_requestUrl(@"http://binhan666.github.io/").
+[[BHNetReqManager sharedManager].bh_requestUrl(@"http://binhandev.github.io/").
 bh_newmothed() 
 startRequestWithCompleteHandler:^(id response, NSError *error) {
 }
 ```
 
-代码可以下载GITHUB中 [BlogDemo](https://github.com/binhan666/BlogDemo) 进行查看。            
+代码可以下载GITHUB中 [BlogDemo](https://github.com/binhandev/BlogDemo) 进行查看。            

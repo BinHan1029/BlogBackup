@@ -1,4 +1,4 @@
-title: django数据库同步及创建管理员
+title: django 数据库同步及创建管理员
 date: 2016-01-28 11:43:03
 tags:
 - Python

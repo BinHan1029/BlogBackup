@@ -1,5 +1,5 @@
 ---
-title: 关于iOS9下ATS访问本地网络
+title: 关于 iOS9 下 ATS 访问本地网络
 date: 2017-01-03 22:05:00
 tags:
 - 移动开发
@@ -39,6 +39,216 @@ HTTPS适配完成后，可以先使用/usr/bin/nscurl（OS X v10.11及以上系�
 
 ``` objc
 /usr/bin/nscurl --ats-diagnostics [--verbose] URL
+```
+
+* ats-diagnostics 参数的设定，会模拟ATS属性的不同配置场景（NSAllowsArbitraryLoads、NSExceptionMinimumTLSVersion、NSExceptionRequiresForwardSecrecy 和 NSExceptionAllowsInsecureHTTPLoads 的不同组合）进行连接；
+* verbose 指定时，可显示ATS不同配置场景的详细信息。
+
+例，检测百度官网 https://www.baidu.com
+
+```
+Starting ATS Diagnostics
+
+Configuring ATS Info.plist keys and displaying the result of HTTPS loads to https://www.baidu.com.
+A test will "PASS" if URLSession:task:didCompleteWithError: returns a nil error.
+================================================================================
+
+Default ATS Secure Connection
+---
+ATS Default Connection
+ATS Dictionary:
+{
+}
+Result : PASS
+---
+
+================================================================================
+
+Allowing Arbitrary Loads
+
+---
+Allow All Loads
+ATS Dictionary:
+{
+    NSAllowsArbitraryLoads = true;
+}
+Result : PASS
+---
+
+================================================================================
+
+Configuring TLS exceptions for www.baidu.com
+
+---
+TLSv1.2
+ATS Dictionary:
+{
+    NSExceptionDomains =     {
+        "www.baidu.com" =         {
+            NSExceptionMinimumTLSVersion = "TLSv1.2";
+        };
+    };
+}
+Result : PASS
+---
+
+---
+TLSv1.1
+ATS Dictionary:
+{
+    NSExceptionDomains =     {
+        "www.baidu.com" =         {
+            NSExceptionMinimumTLSVersion = "TLSv1.1";
+        };
+    };
+}
+Result : PASS
+---
+
+---
+TLSv1.0
+ATS Dictionary:
+{
+    NSExceptionDomains =     {
+        "www.baidu.com" =         {
+            NSExceptionMinimumTLSVersion = "TLSv1.0";
+        };
+    };
+}
+Result : PASS
+---
+
+================================================================================
+
+Configuring PFS exceptions for www.baidu.com
+
+---
+Disabling Perfect Forward Secrecy
+ATS Dictionary:
+{
+    NSExceptionDomains =     {
+        "www.baidu.com" =         {
+            NSExceptionRequiresForwardSecrecy = false;
+        };
+    };
+}
+Result : PASS
+---
+
+================================================================================
+
+Configuring PFS exceptions and allowing insecure HTTP for www.baidu.com
+
+---
+Disabling Perfect Forward Secrecy and Allowing Insecure HTTP
+ATS Dictionary:
+{
+    NSExceptionDomains =     {
+        "www.baidu.com" =         {
+            NSExceptionAllowsInsecureHTTPLoads = true;
+            NSExceptionRequiresForwardSecrecy = false;
+        };
+    };
+}
+Result : PASS
+---
+
+================================================================================
+
+Configuring TLS exceptions with PFS disabled for www.baidu.com
+
+---
+TLSv1.2 with PFS disabled
+ATS Dictionary:
+{
+    NSExceptionDomains =     {
+        "www.baidu.com" =         {
+            NSExceptionMinimumTLSVersion = "TLSv1.2";
+            NSExceptionRequiresForwardSecrecy = false;
+        };
+    };
+}
+Result : PASS
+---
+
+---
+TLSv1.1 with PFS disabled
+ATS Dictionary:
+{
+    NSExceptionDomains =     {
+        "www.baidu.com" =         {
+            NSExceptionMinimumTLSVersion = "TLSv1.1";
+            NSExceptionRequiresForwardSecrecy = false;
+        };
+    };
+}
+Result : PASS
+---
+
+---
+TLSv1.0 with PFS disabled
+ATS Dictionary:
+{
+    NSExceptionDomains =     {
+        "www.baidu.com" =         {
+            NSExceptionMinimumTLSVersion = "TLSv1.0";
+            NSExceptionRequiresForwardSecrecy = false;
+        };
+    };
+}
+Result : PASS
+---
+
+================================================================================
+
+Configuring TLS exceptions with PFS disabled and insecure HTTP allowed for www.baidu.com
+
+---
+TLSv1.2 with PFS disabled and insecure HTTP allowed
+ATS Dictionary:
+{
+    NSExceptionDomains =     {
+        "www.baidu.com" =         {
+            NSExceptionAllowsInsecureHTTPLoads = true;
+            NSExceptionMinimumTLSVersion = "TLSv1.2";
+            NSExceptionRequiresForwardSecrecy = false;
+        };
+    };
+}
+Result : PASS
+---
+
+---
+TLSv1.1 with PFS disabled and insecure HTTP allowed
+ATS Dictionary:
+{
+    NSExceptionDomains =     {
+        "www.baidu.com" =         {
+            NSExceptionAllowsInsecureHTTPLoads = true;
+            NSExceptionMinimumTLSVersion = "TLSv1.1";
+            NSExceptionRequiresForwardSecrecy = false;
+        };
+    };
+}
+Result : PASS
+---
+
+---
+TLSv1.0 with PFS disabled and insecure HTTP allowed
+ATS Dictionary:
+{
+    NSExceptionDomains =     {
+        "www.baidu.com" =         {
+            NSExceptionAllowsInsecureHTTPLoads = true;
+            NSExceptionMinimumTLSVersion = "TLSv1.0";
+            NSExceptionRequiresForwardSecrecy = false;
+        };
+    };
+}
+Result : PASS
+---
+
+================================================================================
 ```
 
 

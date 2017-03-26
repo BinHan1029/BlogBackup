@@ -1,4 +1,4 @@
-title: 为AFNetWorking添加接口数据缓存
+title: 为 AFNetWorking 添加接口数据缓存
 date: 2015-04-12 22:33:48
 tags:
 - 移动开发
@@ -131,4 +131,4 @@ static NSTimeInterval const CustomURLCacheExpirationInterval = 600;
 ### 最后
 关于实际开发中，接口数据可能需要实时获取最新的数据，这就要需要我们自己修改接口数据刷新策略，一种常见的做法，每次接口请求的时候都带上上次请求的时间戳，当服务端有新数据返回时即解析最新的数据，重新加入缓存；当没有新数据时则可以通过返回状态码302的方式通知客户端直接获取缓存数据。
 
-代码可以下载GITHUB中[BlogDemo](https://github.com/binhan666/BlogDemo)进行查看。
+代码可以下载GITHUB中[BlogDemo](https://github.com/binhandev/BlogDemo)进行查看。

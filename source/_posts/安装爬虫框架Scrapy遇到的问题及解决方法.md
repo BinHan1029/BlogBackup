@@ -1,4 +1,4 @@
-title: 安装爬虫框架Scrapy遇到的问题及解决方法
+title: 安装爬虫框架 Scrapy 遇到的问题及解决方法
 date: 2016-01-06 22:33:54
 comments: true
 tags:

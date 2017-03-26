@@ -1,4 +1,4 @@
-title: 初识django搭建网站
+title: 初识 django 搭建网站
 date: 2016-01-27 14:38:13
 tags:
 - Python

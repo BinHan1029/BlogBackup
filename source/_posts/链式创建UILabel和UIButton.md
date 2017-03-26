@@ -1,5 +1,5 @@
 	---
-title: 链式创建UILabel和UIButton
+title: 链式创建 UILabel 和 UIButton
 date: 2015-08-05 18:56:53
 tags:
 - 移动开发
