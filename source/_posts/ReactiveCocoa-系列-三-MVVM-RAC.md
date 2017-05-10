@@ -22,9 +22,25 @@ tags:
 这里又提到一个很重要的概念 bind。其实单单把业务通过 MVVM 拆分成更小更单一的模块时，那么 View 和 ViewModel 两者之间的数据的同步就可以交给函数式响应式编程框架 [ReactiveCocoa](https://github.com/ReactiveCocoa/ReactiveCocoa)，当然从某方面将，做数据的时时同步也有其他的方式，但是无论使用 delegate 或者 block，总是让我觉得写出来的代码不如通过 [ReactiveCocoa](https://github.com/ReactiveCocoa/ReactiveCocoa) bind 的方式显得优雅。因为系统中的 KVO、UIKit event、delegate、selector 等都增加了 RAC 支持，所以都不用去做很多跨函数的事，提供了一个单一的、统一的方法去处理异步的行为。
 
 
+### 关于MVVM的优缺点：
+
+优点：
+
+* 相对于 MVC 控制器层臃肿的逻辑与视图，是很难对某一块逻辑进行测试的，而剥离出来的 ViewModel 是一个独立的模块，所以对于逻辑部分可以进行单元测试。
+* 正因为 ViewModel 的独立性，所以代码的可复用性更高，在某两个模块只要业务逻辑相同，那么完全可以粘贴过来将需要更改的接口部分进行修改，即可。这里面可以使用类模板减少重复的代码书写。
+
+缺点：
+
+* 项目中类(.h/.m)文件会增多，这样可能会让代码编译速度和程序启动速度变慢，当然这我觉得这个效率其实是可以忽略的。
+* 从某方面讲，其实随着业务的逐渐庞大，是很难从根本上绝对避免功能上的耦合的，所以 ViewModel 的剥离的层级越多，也会相对增加项目结构的复杂度。比如一个 table 有 headerView，对应的 headerView 也会有一个 ViewModel，但是如果 headerView 的模块足够复杂的话，可能需要进一步的细分 headerView，那么就会增加更多的 ViewModel。
+* 结合 RAC，排错困难。
+
+最后，撸了一个 MVVM + RAC 的 demo，效果如下，通过搜索然后展示列表，当搜索结果为空时展示空数据视图。代码可以在Github中[BlogDemo](https://github.com/binhandev/BlogDemo)进行查看。
 
 
-
+<video width="308" height="570" autoplay controls>
+	<source src="http://binhandev.github.io/assets/blogImg/mvvm.mov">
+</video>
 
 
 

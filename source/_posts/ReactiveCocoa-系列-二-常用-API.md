@@ -149,7 +149,6 @@ RACSignal *retrySignal = [signal retry];
 }];
 ```
 
-* 3123 
 
 
 

@@ -30,7 +30,7 @@ tags:
 }
 ```
 
-其实这里我们可以发现一个问题，按钮的点击事件和回调函数 @selector(chick:) 已经被分离开了，我们如果事先不知道按钮和回调函数是通过 addTarget 方法建立关系的话，我们是很难知道他俩之间的联系的，另外一方面我们都知道方法的调用最终是给一个对象发送消息，这里我们也很难看到到底是哪个对象最终执行了回调函数 @selector(chick:)。而如果改写成 RAC 的写法理解可能就变得容易的多：
+其实这里我们可以发现一个问题，按钮的点击事件和回调函数 @selector(chick:) 已经被分离开了，既所谓的跨函数操作；另外通过 addTarget 中的 self 跟事件响应链相关联的，如果我们把 self 更改成 nil，将 chick 事件写在父控件中会发现程序仍旧能正常运行，另外一方面我们都知道方法的调用最终是给一个对象发送消息，这里我们也很难看到到底是哪个对象最终执行了回调函数 @selector(chick:)。而如果改写成 RAC 的写法理解可能就变得容易的多：
 
 ``` objc
 -(void)addEvent
@@ -150,7 +150,7 @@ RACSubscriber 是一个协议，所有实现了该协议的类都可以成为订
 
 [http://www.cocoachina.com/ios/20160106/14880.html](http://www.cocoachina.com/ios/20160106/14880.html)
 
-
+[http://www.cocoachina.com/ios/20140115/7702.html](http://www.cocoachina.com/ios/20140115/7702.html)
 
 
 
