@@ -74,5 +74,22 @@ theme: hexo-theme-tranquilpeak
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: https://github.com/BinHanDev/BinHanDev.github.io.git
+  repository: http://github.com/BinHanDev/BinHanDev.github.io.git
   branch: master
+
+
+algolia:
+  appId: "8D50WOTW8Q"
+  apiKey: "1b7cf77512c3f6325bde5b552b9894ff"
+  adminApiKey: "98e44fa9607f8202e0f0b6c2bf69a199"
+  chunkSize: 5000
+  indexName: "tranquilpeak"
+fields:
+    - title
+    - date
+    - permalink
+    - thumbnailImageUrl
+    - tags
+    - categories
+    - excerpt
+    - excerpt:strip
