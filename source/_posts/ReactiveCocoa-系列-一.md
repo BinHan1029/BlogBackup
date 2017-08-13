@@ -98,7 +98,7 @@ tags:
 
 上面只是简单举例说明 RAC 的处理一些事情的能力，当然它远远要比想象中的强大，但是在这之前我觉得还是很有必要了解一些 RAC 中涉及到的一些概念，既 RAC 中的四大核心组件。
 
-#### 信号源：RACStream 及其子类
+### 信号源：RACStream 及其子类
 
 ![Alt text](/assets/blogImg/rac_1.png)
 
@@ -126,19 +126,19 @@ RACSubject 是一个可以手动控制的信号，这个相对 RACSignal 有了�
 
 RACSequence 从图上来看其实它跟 RACSignal 是并列的，也没有太直接的关系，而 RACSequence 通常是为了简化 Objective-C 中的集合操作。
 
-#### 订阅者：RACSubscriber 的实现类及其子类
+### 订阅者：RACSubscriber 的实现类及其子类
 
 RACSubscriber 是一个协议，所有实现了该协议的类都可以成为订阅者。
 
 其中 -sendNext: 、-sendError: 和 -sendCompleted 分别用来从 RACSignal 接收 next 、error 和 completed 事件，而 -didSubscribeWithDisposable: 则用来接收代表某次订阅的 disposable 对象。
 
-#### 调度器：RACScheduler 及其子类
+### 调度器：RACScheduler 及其子类
 
 ![Alt text](/assets/blogImg/rac_3.png)
 
 主要为对 GCD 的封装，包含了一些同步异步及定时器的操作。
 
-#### 清洁工：RACDisposable 及其子类
+### 清洁工：RACDisposable 及其子类
 
 ![Alt text](/assets/blogImg/rac_2.png)
 

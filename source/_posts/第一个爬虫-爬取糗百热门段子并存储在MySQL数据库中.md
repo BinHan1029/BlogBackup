@@ -6,13 +6,13 @@ tags:
 ---
 
 
-## 创建项目
+### 创建项目
 主要为爬取[糗事百科](http://www.qiushibaike.com/)上热门段子资源，在Terminal下执行命令，参数为项目名。
 
 ```
 scrapy startproject qiubai
 ```
-#### 项目目录结构说明
+### 项目目录结构说明
 
 ```
 qiubai/
@@ -26,7 +26,7 @@ qiubai/
 
 <!-- more -->
 
-## 明确目标，定义 item
+### 明确目标，定义 item
 在 Scrapy 中，items 是用来加载抓取内容的容器，有点类似 iOS 中的 model 模型，可以理解成类似于 ORM 的映射关系，但是提供了一些额外的保护减少错误。
 
 在qiubai目录下的 items.py 文件，在后面添加我们自己的 class hotItem，包含了头像、昵称、内容、点赞数量及评论数：
@@ -45,7 +45,7 @@ class hotItem(scrapy.Item):
 
 
 
-## 制作爬虫
+### 制作爬虫
 Spider 是用户自己编写的类，用来从一个域（或域组）中抓取信息。
 他们定义了用于下载的URL列表、跟踪链接的方案、解析网页内容的方式，以此来提取 items。
 要建立一个 Spider，你必须用 scrapy.spider.BaseSpider 创建一个子类，并确定三个强制的属性：
@@ -145,7 +145,7 @@ class RandomUserAgentMiddleware(UserAgentMiddleware):
 ### 取
 在基础的爬虫里，这一步可以用正则表达式来抓。在 Scrapy 里，使用一种叫做 XPath selectors的机制，它基于 XPath 表达式。如果你想了解更多 selectors 和其他机制你可以查阅资料：[选择器(Selectors)](http://scrapy-chs.readthedocs.org/zh_CN/latest/topics/selectors.html)
 
-#### 简单的罗列一下有用的xpath路径表达式：
+### 简单的罗列一下有用的xpath路径表达式：
 ```
      表达式	      描述
 	nodename	选取此节点的所有子节点。

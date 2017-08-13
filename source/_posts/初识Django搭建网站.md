@@ -15,13 +15,13 @@ tags:
 
  *** 
 
-## 创建项目
+### 创建项目
 ![Alt text](/assets/blogImg/django_1.png)
 关于 app 的概念，比如[NGA www.nga.cn](http://www.nga.cn/)下包含了[论坛http://bbs.nga.cn/](http://bbs.nga.cn/)、还会有[直播http://tv.nga.cn/](http://tv.nga.cn/)，从运维上讲代表不同的配置段 app1 和 app2 可以连接不同的数据库，占用不同的进程，不一样的 IP 地址和服务器 因为 html 是跳链，所以你感觉不到 IP 的不同。
 
 <!-- more -->
 
-#### 目录结构
+### 目录结构
 ![Alt text](/assets/blogImg/django_2.png)
 
 * setting.py  包括了系统的数据库配置、应用配置和其他配置
@@ -62,7 +62,7 @@ python manager.py runserver
 
 在设置 DEBUG=false 后, 一定要正确设置 ALLOWED_HOSTS, 避免出现 SuspiciousOperation 错误。
 
-## 创建第一个视图函数
+### 创建第一个视图函数
 在 views.py 文件下添加下面的函数，我们定义个一段 html 代码，然后将其返回，当请求一个页面时，Django 把请求的 metadata 数据包装成一个 HttpRequest 对象，然后 Django 加载合适的 view 方法，把这个 HttpRequest 对象作为第一个参数传给 view 方法。任何 view 方法都应该返回一个 HttpResponse 对象。
 
 ```python
@@ -90,7 +90,7 @@ url(r'^sayHello/', sayHello),
 ![Alt text](/assets/blogImg/django_4.png)
 
 
-##  创建第一个模板文件
+###  创建第一个模板文件
 在 [django](https://www.djangoproject.com/download/) 中所有的模板文件均是放在 templates 文件夹下，下面创建一个页面模板，命名为 index.html。
 
 ```html

@@ -14,7 +14,7 @@ tags:
 <!-- more -->
 
 
-## ATS属性配置
+### ATS属性配置
 当然 ATS 相关 NSAppTransportSecurity 下的诸多属性都是可选的，毕竟通常我们并不能保证我们跳转的web页面、多媒体资源、一些第三方的 SDK 等是一定支持 HTTPS 的，所以在这方面 Apple 给予了足够的可配置选项，当然在提交审核时我们需要提供一个"合理的解释"。
 
 例如:
@@ -27,14 +27,14 @@ tags:
 
 ![Alt text](/assets/blogImg/ats_1.png)
 
-## iOS9下访问本地网络 192.168.1.1
+### iOS9下访问本地网络 192.168.1.1
 我们的项目是需要访问本地网络的，APP 运行时连接硬件产品发出的热点，而连接采用的是 IP 地址访问，测试的时候发现 iOS10 下无论开启/关闭 ATS，IP下的网络都能正常访问，而在 iOS9 下无论怎么配置 NSAppTransportSecurity 的相关参数都无法建立网络连接，当然我们尝试了设置 NSExceptionDomains 进行设置但是并没有效果，后来觉得既然是过滤域名显然对 IP 是无效的，而不同的是 Apple 在 iOS10 下直接让 IP 连接绕过了 ATS。
 
 其实从某种侧面考虑，仅仅是涉及到局域网内的访问貌似也不会设计到数据安全问题，所以个人猜测 iOS9 下可能是 Apple 一开始推出 ATS 而没有全面考虑而导致本地网络无法访问的。当然也发现有更多的人受到同样问题的困扰，苹果的官方解释貌似还是需要使用 NSAllowsArbitraryLoads。。。
 
 ![Alt text](/assets/blogImg/ats_2.png)
 
-## ATS支持诊断工具
+### ATS支持诊断工具
 服务端HTTPS适配完成后，可以先使用/usr/bin/nscurl（OS X v10.11及以上系统支持）工具模拟进行ATS网络连接状况诊断，命令如下：
 
 ``` objc

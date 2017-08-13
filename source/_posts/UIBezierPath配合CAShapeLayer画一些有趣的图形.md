@@ -7,7 +7,7 @@ tags:
 
 CAShapeLayer是CALayer的子类，但是比CALayer更灵活，配合一个神奇的属性path用这个属性配合上 UIBezierPath 这个类就可以达到超神的效果。
 
-## 玩一下 UIBezierPath
+### 玩一下 UIBezierPath
 UIBezierPath 顾名思义，这是用贝塞尔曲线的方式来构建一段弧线，你可以用任意条弧线来组成你想要的形状，它包含起始点、终点、及控制点三个参数。如下图红色矩形范围内的白色背景，最上面就是一条有弧度的曲线。
 
 <!-- more -->
@@ -39,7 +39,7 @@ UIBezierPath 顾名思义，这是用贝塞尔曲线的方式来构建一段弧�
 
 ![Alt text](/assets/blogImg/bezier_2.png)
 
-## 使用 UIBezierPath 画圆及添加加载动画
+### 使用 UIBezierPath 画圆及添加加载动画
 
 
 
@@ -67,7 +67,7 @@ UIBezierPath 顾名思义，这是用贝塞尔曲线的方式来构建一段弧�
 }
 ```
 
-## 利用 layer 的 mask 属性为图片添加遮罩
+### 利用 layer 的 mask 属性为图片添加遮罩
 
 ```objc
 -(void)showImage
@@ -98,7 +98,7 @@ UIBezierPath 顾名思义，这是用贝塞尔曲线的方式来构建一段弧�
 
 ![Alt text](/assets/blogImg/bezier_4.gif)
 
-## 最后
+### 最后
 总之使用 UIbezierPath 和 CAShapeLayer 可以画出你想要的任何形状，没有它做不到，只有你想不到，当然有时候可能会比较复杂而显得比较笨拙，但最终实现后确实会显得很有趣。
 
 代码可以下载GITHUB中[BlogDemo](https://github.com/binhandev/BlogDemo)进行查看。

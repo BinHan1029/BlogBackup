@@ -6,10 +6,10 @@ tags:
 - Scrapy
 ---
 
-## 关于环境
+### 关于环境
 **MAC OS** :10.10
 
-## 安装	Scrapy
+### 安装	Scrapy
 依然像安装 MySQL-python 模块一样，在终端下使用 pip 进行安装：
 
 ```ruby

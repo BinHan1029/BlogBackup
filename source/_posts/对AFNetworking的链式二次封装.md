@@ -19,7 +19,7 @@ tags:
 
 <!-- more -->
 
-#### 链式结构的最终调用式例
+### 链式结构的最终调用式例
 
 ``` objc
 [[BHNetReqManager sharedManager].bh_requestUrl(@"http://binhandev.github.io/").
