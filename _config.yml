@@ -74,7 +74,7 @@ theme: hexo-theme-tranquilpeak
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: http://github.com/BinHanDev/BinHanDev.github.io.git
+  repository: https://github.com/BinHanDev/BinHanDev.github.io.git
   branch: master
 
 
